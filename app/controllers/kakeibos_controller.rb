@@ -5,7 +5,8 @@ class KakeibosController < ApplicationController
   # GET /kakeibos.json
   def index
     #5件までデフォルト表示
-     @kakeibos = Kakeibo.limit(5).all
+     #@kakeibos = Kakeibo.limit(5).all
+     @kakeibos = Kakeibo.all
   end
 
   # GET /kakeibos/1
@@ -24,11 +25,9 @@ class KakeibosController < ApplicationController
 
   # POST /kakeibos
   # POST /kakeibos.json
-  def create
-    
+  def create    
     @kakeibo = Kakeibo.new(kakeibo_params)
-    logger.debug(@kakeibo.beauty_exp)
-
+    #logger.debug(@kakeibo.kicho_year)
     respond_to do |format|
       if @kakeibo.save
         format.html { redirect_to @kakeibo, notice: 'Kakeibo was successfully created.' }
@@ -109,7 +108,8 @@ class KakeibosController < ApplicationController
                                        :beauty_exp, 
                                        :jiko_toushi ,
                                        :otherwise_exp, 
-                                       :memo)
+                                       :memo
+                                       )
     end
 end
 

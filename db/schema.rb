@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_02_033354) do
+ActiveRecord::Schema.define(version: 2018_09_02_051556) do
 
   create_table "kakeibos", force: :cascade do |t|
     t.date "kicho_date"
@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 2018_09_02_033354) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "jiko_toushi"
-    t.string "kicyo_year"
-    t.string "kicyo_nen"
-    t.string "kicyo_day"
+    t.string "kicho_year"
+    t.string "kicho_month"
+    t.string "kicho_day"
   end
 
   create_table "posts", force: :cascade do |t|
