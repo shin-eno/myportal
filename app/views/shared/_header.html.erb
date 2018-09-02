@@ -1,0 +1,35 @@
+<%
+=begin
+%>
+    <% image_tag("logo.gif" , size:"272x48" , alt: "EnPortal")%>
+<%
+=end
+%>
+
+<div class="menubar">
+<%
+=begin
+%>
+
+<%= menu_link_to "TOP" , root_path %>
+        &nbsp; | &nbsp; <%= menu_link_to "家計簿" , "/kakeibos" %>
+        &nbsp; | &nbsp; <%= menu_link_to "管理ページ" , "#" %>
+        &nbsp; | &nbsp; <%= menu_link_to "このシステムについて" , about_path %>
+<%
+=end
+%>
+
+<ul class="menubar">
+   <li><%= menu_link_to "TOP" , root_path %></li>
+   <li><a href="#">家計簿</a>
+      <ul>
+         <li><%= menu_link_to "新規作成" , "/kakeibos" %></li>
+         <li><%= menu_link_to "一覧表示" , "/kakeibos/list" %></li>
+      </ul>
+   </li>
+   <li><a href="#">管理ページ</a>
+   </li>
+   <li><a href="#">システムについて</a>
+   </li>
+</ul>
+</div>

@@ -1,0 +1,2 @@
+class Kakeibo < ApplicationRecord
+end

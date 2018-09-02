@@ -10,11 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_05_154724) do
+ActiveRecord::Schema.define(version: 2018_09_02_033354) do
+
+  create_table "kakeibos", force: :cascade do |t|
+    t.date "kicho_date"
+    t.integer "food_exp"
+    t.integer "amusement"
+    t.integer "entertainment_exp"
+    t.integer "transport_exp"
+    t.integer "daily_necessities"
+    t.integer "fixture"
+    t.integer "beauty_exp"
+    t.integer "otherwise_exp"
+    t.string "memo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "jiko_toushi"
+    t.string "kicyo_year"
+    t.string "kicyo_nen"
+    t.string "kicyo_day"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.string "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "user_id"
+    t.string "name"
+    t.string "email"
+    t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

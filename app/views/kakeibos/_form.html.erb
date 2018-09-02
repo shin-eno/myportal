@@ -1,0 +1,86 @@
+<dev>
+<p>
+  　食費　	飲食に関わる全ての費用<br/>
+  娯楽費　	ゲームセンターなど非生産な遊びで使った費用<br/>
+  交際費　	会社、友人、個人、家族などで使ったの費用<br/>
+  交通費　	遊興、交際ではない交通で使った費用<br/>
+  日用品　	生活用品などの費用<br/>
+  　備品　	日用品に含まないものなど<br/>
+  美容費　	主に髪の毛のカットで使った費用<br/>
+  自己投資　書籍など、自分の成長にかかかる費用<br/>
+  その他　	上記、項目に該当しないもの<br/>
+</p>
+</dev>
+
+<%= form_with(model: kakeibo, local: true) do |form| %>
+  <% if kakeibo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(kakeibo.errors.count, "error") %> prohibited this kakeibo from being saved:</h2>
+
+      <ul>
+      <% kakeibo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    記帳日　：
+    <%= form.date_select :kicho_date , use_month_numbers:true , use_two_digit_numbers:true %>
+  </div>
+
+  <div class="field">
+    食費　　：
+    <%= form.number_field :food_exp %>
+  </div>
+
+  <div class="field">
+    娯楽費　：
+    <%= form.number_field :amusement %>
+  </div>
+
+  <div class="field">
+    交際費　：
+    <%= form.number_field :entertainment_exp %>
+  </div>
+
+  <div class="field">
+    交通費　：
+    <%= form.number_field :transport_exp %>
+  </div>
+
+  <div class="field">
+    日用品　：
+    <%= form.number_field :daily_necessities %>
+  </div>
+
+  <div class="field">
+    備品　　：
+    <%= form.number_field :fixture %>
+  </div>
+
+  <div class="field">
+    美容費　：
+    <%= form.number_field :beauty_exp %>
+  </div>
+
+  <div class="field">
+    自己投資：
+    <%= form.number_field :jiko_toushi %>
+  </div>
+
+  <div class="field">
+    その他　：
+    <%= form.number_field :otherwise_exp %>
+  </div>
+
+  <div class="field">
+    備考　　：
+    <%= form.text_field :memo %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

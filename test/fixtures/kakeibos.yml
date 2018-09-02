@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  kicho_date: 2018-07-19
+  food_exp: 1
+  amusement: 1
+  entertainment_exp: 1
+  transport_exp: 1
+  daily_necessities: 1
+  fixture: 1
+  beauty_exp: 1
+  otherwise_exp: 1
+  memo: MyString
+
+two:
+  kicho_date: 2018-07-19
+  food_exp: 1
+  amusement: 1
+  entertainment_exp: 1
+  transport_exp: 1
+  daily_necessities: 1
+  fixture: 1
+  beauty_exp: 1
+  otherwise_exp: 1
+  memo: MyString

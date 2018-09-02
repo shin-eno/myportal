@@ -1,0 +1,42 @@
+// Place all the styles related to the kakeibos controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+table.list , table.attr {
+    font: size 90%;
+    width: 100%
+}
+
+th.listheader {
+    background-color: #499;
+    color: white;
+    font-weight: normal;
+}
+
+table.list td, table.list th,
+table.attr td , table.attr th {
+    padding: 4px;
+}
+
+td.listbody {
+    background-color: #cee;
+}
+
+.square_btn {
+    position: relative;
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    text-decoration: none;
+    color: #FFF;
+    background: #03A9F4;/*色*/
+    border: solid 1px #0f9ada;/*線色*/
+    border-radius: 4px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+    text-shadow: 0 1px 0 rgba(0,0,0,0.2);
+}
+
+.square_btn:active {/*押したとき*/
+    border: solid 1px #03A9F4;
+    box-shadow: none;
+    text-shadow: none;
+}

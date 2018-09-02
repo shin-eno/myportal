@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<h1>家計簿</h1>
+
+<%= link_to '新規作成', new_kakeibo_path %>
+<table class="list">
+  <thead>
+    <tr>
+      <th class="listheader" >記帳日</th>
+      <th class="listheader" >食費</th>
+      <th class="listheader" >娯楽</th>
+      <th class="listheader" >交際費</th>
+      <th class="listheader" >交通費</th>
+      <th class="listheader" >日用品</th>
+      <th class="listheader" >備品</th>
+      <th class="listheader" >美容費</th>
+      <th class="listheader" >自己投資</th>
+      <th class="listheader" >その他</th>
+      <th class="listheader" >合計</th>
+      <th class="listheader" >備考</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kakeibos.each do |kakeibo| %>
+      <tr>
+        <td class="listbody" ><%= kakeibo.kicho_date %></td>
+        <td class="listbody" style="text-align: right"><%= kakeibo.food_exp %></td>
+        <td class="listbody" style="text-align: right"><%= kakeibo.amusement %></td>
+        <td class="listbody" style="text-align: right"><%= kakeibo.entertainment_exp %></td>
+        <td class="listbody" style="text-align: right"><%= kakeibo.transport_exp %></td>
+        <td class="listbody" style="text-align: right"><%= kakeibo.daily_necessities %></td>
+        <td class="listbody" style="text-align: right"><%= kakeibo.fixture %></td>
+        <td class="listbody" style="text-align: right"><%= kakeibo.beauty_exp %></td>
+        <td class="listbody" style="text-align: right"><%= kakeibo.jiko_toushi %></td>
+        <td class="listbody" style="text-align: right"><%= kakeibo.otherwise_exp %></td>
+        <td class="listbody" style="text-align: right"><%= kakeibo.food_exp.to_i +
+                kakeibo.amusement.to_i +
+                kakeibo.entertainment_exp.to_i +
+                kakeibo.transport_exp.to_i +
+                kakeibo.daily_necessities.to_i +
+                kakeibo.fixture.to_i +
+                kakeibo.beauty_exp.to_i +
+                kakeibo.jiko_toushi.to_i +
+                kakeibo.otherwise_exp.to_i
+            %></td>
+        <td class="listbody" ><%= kakeibo.memo[0,10] %></td>
+        <td>
+          <%= link_to '参照', kakeibo , class: 'square_btn' %>
+          <%= link_to '編集', edit_kakeibo_path(kakeibo) , class: 'square_btn' %>
+          <%= link_to '削除', kakeibo, method: :delete, data: { confirm: 'Are you sure?' }  , class: 'square_btn'%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

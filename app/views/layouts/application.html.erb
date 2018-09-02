@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Enportal</title>
+    <title><%= page_title %></title>
+    <meta charset="utf-8" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +11,27 @@
   </head>
 
   <body>
-    <%= yield %>
+  <!-- コンテナ  -->
+    <div id="container">
+
+      <!-- ヘッダ  -->
+      <div id="header">
+        <%= render "shared/header" %>
+      </div>
+
+      <!-- メインコンテンツ  -->
+      <div id="content">
+        <%= yield %>
+      </div>
+<!--      サイドバーは現在いらないと感じるためコメントアウト
+      <div id="sideber">
+        <%= render "shared/sidebar" %>
+      </div>
+-->
+      <!-- フッタ  -->
+      <div id="footer">
+        <%= render "shared/footer" %>
+      </div>
+    </div>
   </body>
 </html>

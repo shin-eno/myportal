@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+  <tr>
+    <th>記帳日</th>
+    <th><%= @kakeibo.kicho_date %></th>
+  </tr>
+  <tr>
+    <th>食費</th>
+    <th><%= @kakeibo.food_exp %></th>
+  </tr>
+  <tr>
+    <th>娯楽</th>
+    <th><%= @kakeibo.amusement %></th>
+  </tr>
+  <tr>
+    <th>交際費</th>
+    <th><%= @kakeibo.entertainment_exp %></th>
+  </tr>
+  <tr>
+    <th>交通費</th>
+    <th><%= @kakeibo.transport_exp %></th>
+  </tr>
+
+  <tr>
+    <th>日用品</th>
+    <th><%= @kakeibo.daily_necessities %></th>
+  </tr>
+  <tr>
+    <th>備品</th>
+    <th><%= @kakeibo.fixture %></th>
+  </tr>
+  <tr>
+    <th>美容費</th>
+    <th><%= @kakeibo.beauty_exp %></th>
+  </tr>
+  <tr>
+    <th>自己投資</th>
+    <th><%= @kakeibo.jiko_toushi %></th>
+  </tr>
+  <tr>
+    <th>その他</th>
+    <th><%= @kakeibo.otherwise_exp %></th>
+  </tr>
+  <tr>
+    <th>備考</th>
+    <th><%= @kakeibo.memo %></th>
+  </tr>
+</table>
+
+<%= link_to 'Edit', edit_kakeibo_path(@kakeibo) %> |
+<%= link_to 'Back', kakeibos_path %>
