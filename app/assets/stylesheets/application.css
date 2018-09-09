@@ -103,3 +103,13 @@ ul.menubar li:hover ul {
     display: block;            /* ★4:項目内全域をリンク可能にする */
  
  }
+
+
+ /*データ領域にスクロールバーを作成 */
+ /* 外枠部分 */
+div.data_area {
+    width: 1000px;
+    border-right: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+    border-left: 1px solid #CCC;
+  }

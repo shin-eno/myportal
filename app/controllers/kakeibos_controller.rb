@@ -4,9 +4,9 @@ class KakeibosController < ApplicationController
   # GET /kakeibos
   # GET /kakeibos.json
   def index
-    #5件までデフォルト表示
-     #@kakeibos = Kakeibo.limit(5).all
-     @kakeibos = Kakeibo.all
+    #20件までデフォルト表示
+     @kakeibos = Kakeibo.order("created_at desc").limit(20).all
+     #@kakeibos = Kakeibo.all
   end
 
   # GET /kakeibos/1
@@ -26,12 +26,19 @@ class KakeibosController < ApplicationController
   # POST /kakeibos
   # POST /kakeibos.json
   def create    
+    #パラメタの値を取得してレコードを生成する
     @kakeibo = Kakeibo.new(kakeibo_params)
+    
     #logger.debug(@kakeibo.kicho_year)
     respond_to do |format|
       if @kakeibo.save
-        format.html { redirect_to @kakeibo, notice: 'Kakeibo was successfully created.' }
-        format.json { render :show, status: :created, location: @kakeibo }
+        @kakeibo = Kakeibo.new(params.require(:kakeibo).permit(:kicho_date))
+        
+        #連続して作成
+        format.html { redirect_to "/kakeibos/new", notice: 'Kakeibo was successfully created.' }
+        
+        #format.html { redirect_to @kakeibo, notice: 'Kakeibo was successfully created.' }
+        #format.json { render :show, status: :created, location: @kakeibo }
       else
         format.html { render :new }
         format.json { render json: @kakeibo.errors, status: :unprocessable_entity }
@@ -65,29 +72,74 @@ class KakeibosController < ApplicationController
 
   def list
     #デフォルトで日毎にチェック
-    if @default_check= nil
-      @default_check = true
+    ###if @default_check= nil
+    ###  @default_check = true
+    ###end
+    #logger.debug("debug month ")
+
+    #パラメータの受取り
+    kakeiboListForm = params[:kakeiboListForm]
+    if kakeiboListForm != nil
+      logger.debug(params[:kakeiboListForm][:serch_date])
+      @serch_date = params[:kakeiboListForm][:serch_date]
     end
+    j = Kakeibo.arel_table
 
-    #検索（日毎で集約）
-    @kakeibos = Kakeibo.find_by_sql("									              	\
-      Select															                          	\
-        kicho_date														                      	\
-        ,sum(COALESCE(food_exp,0)) as food_exp							        	\
-        ,sum(COALESCE(amusement,0)) as amusement							        \
-        ,sum(COALESCE(entertainment_exp,0)) as entertainment_exp			\
-        ,sum(COALESCE(transport_exp,0)) as transport_exp				    	\
-        ,sum(COALESCE(daily_necessities,0)) as daily_necessities			\
-        ,sum(COALESCE(fixture,0)) as fixture								          \
-        ,sum(COALESCE(beauty_exp,0)) as beauty_exp							      \
-        ,sum(COALESCE(jiko_toushi,0)) as jiko_toushi					      	\
-        ,sum(COALESCE(otherwise_exp,0)) as otherwise_exp					    \
-      From																	                          \
-        kakeibos															                        \
-      Group by kicho_date												                    	\
-      Order by kicho_date												                    	\
-      ")
+      #月でグループ化
+      if @serch_date == 'month' then
+          @kakeibos =  Kakeibo.group(:kicho_year,:kicho_month).select([        \
+            :kicho_year                                          \
+          , :kicho_month                                         \
+          , j[:food_exp].sum.as('food_exp')                      \
+          , j[:amusement].sum.as('amusement')                    \
+          , j[:entertainment_exp].sum.as('entertainment_exp')    \
+          , j[:transport_exp].sum.as('transport_exp')            \
+          , j[:daily_necessities].sum.as('daily_necessities')    \
+          , j[:fixture].sum.as('fixture')                        \
+          , j[:beauty_exp].sum.as('beauty_exp')                  \
+          , j[:jiko_toushi].sum.as('jiko_toushi')                \
+          , j[:otherwise_exp].sum.as('otherwise_exp')            \
+          ])
 
+          render :template => "kakeibos/monthlist"
+
+      #年でグループ化
+      elsif @serch_date == 'year' then
+        @kakeibos = Kakeibo.group(:kicho_year).select([ \
+          :kicho_year                         \
+        , j[:food_exp].sum.as('food_exp')                      \
+        , j[:amusement].sum.as('amusement')    \
+        , j[:entertainment_exp].sum.as('entertainment_exp')    \
+        , j[:transport_exp].sum.as('transport_exp')            \
+        , j[:daily_necessities].sum.as('daily_necessities')    \
+        , j[:fixture].sum.as('fixture')                        \
+        , j[:beauty_exp].sum.as('beauty_exp')                  \
+        , j[:jiko_toushi].sum.as('jiko_toushi')                \
+        , j[:otherwise_exp].sum.as('otherwise_exp')            \
+        ])
+ 
+        render :template => "kakeibos/yearlist"
+      
+      #日でグループ化
+      else 
+        @kakeibos =  Kakeibo.group(:kicho_year,:kicho_month,:kicho_day).select([        \
+          :kicho_year                                          \
+          ,:kicho_month                                        \
+          ,:kicho_day                                          \
+        , j[:food_exp].sum.as('food_exp')                      \
+        , j[:amusement].sum.as('amusement')                    \
+        , j[:entertainment_exp].sum.as('entertainment_exp')    \
+        , j[:transport_exp].sum.as('transport_exp')            \
+        , j[:daily_necessities].sum.as('daily_necessities')    \
+        , j[:fixture].sum.as('fixture')                        \
+        , j[:beauty_exp].sum.as('beauty_exp')                  \
+        , j[:jiko_toushi].sum.as('jiko_toushi')                \
+        , j[:otherwise_exp].sum.as('otherwise_exp')            \
+        ])
+
+        render :template => "kakeibos/list"
+
+      end
   end
 
   private
