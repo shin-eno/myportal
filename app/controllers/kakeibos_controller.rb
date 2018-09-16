@@ -71,10 +71,6 @@ class KakeibosController < ApplicationController
   end
 
   def list
-    #デフォルトで日毎にチェック
-    ###if @default_check= nil
-    ###  @default_check = true
-    ###end
     #logger.debug("debug month ")
 
     #パラメータの受取り
