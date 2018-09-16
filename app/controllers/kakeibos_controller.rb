@@ -87,7 +87,7 @@ class KakeibosController < ApplicationController
 
       #月でグループ化
       if @serch_date == 'month' then
-          @kakeibos =  Kakeibo.group(:kicho_year,:kicho_month).select([        \
+          @kakeibos =  Kakeibo.order("kicho_year desc , kicho_month desc").group(:kicho_year,:kicho_month).select([        \
             :kicho_year                                          \
           , :kicho_month                                         \
           , j[:food_exp].sum.as('food_exp')                      \
@@ -101,11 +101,11 @@ class KakeibosController < ApplicationController
           , j[:otherwise_exp].sum.as('otherwise_exp')            \
           ])
 
-          render :template => "kakeibos/monthlist"
+          #render :template => "kakeibos/list"
 
       #年でグループ化
       elsif @serch_date == 'year' then
-        @kakeibos = Kakeibo.group(:kicho_year).select([ \
+        @kakeibos = Kakeibo.order("kicho_year desc").group(:kicho_year).select([ \
           :kicho_year                         \
         , j[:food_exp].sum.as('food_exp')                      \
         , j[:amusement].sum.as('amusement')    \
@@ -118,11 +118,11 @@ class KakeibosController < ApplicationController
         , j[:otherwise_exp].sum.as('otherwise_exp')            \
         ])
  
-        render :template => "kakeibos/yearlist"
+        #render :template => "kakeibos/list"
       
       #日でグループ化
       else 
-        @kakeibos =  Kakeibo.group(:kicho_year,:kicho_month,:kicho_day).select([        \
+        @kakeibos =  Kakeibo.order("kicho_year desc , kicho_month desc ,kicho_day desc").group(:kicho_year,:kicho_month,:kicho_day).select([        \
           :kicho_year                                          \
           ,:kicho_month                                        \
           ,:kicho_day                                          \
@@ -137,7 +137,7 @@ class KakeibosController < ApplicationController
         , j[:otherwise_exp].sum.as('otherwise_exp')            \
         ])
 
-        render :template => "kakeibos/list"
+        #render :template => "kakeibos/list"
 
       end
   end

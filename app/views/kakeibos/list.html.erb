@@ -13,9 +13,7 @@
 <table class="list">
   <thead>
     <tr>
-      <th class="listheader" >年</th>
-      <th class="listheader" >月</th>
-      <th class="listheader" >日</th>
+      <th class="listheader" >年月日</th>
       <th class="listheader" >食費</th>
       <th class="listheader" >娯楽</th>
       <th class="listheader" >交際費</th>
@@ -34,9 +32,15 @@
     <% if ! @kakeibos.nil?  %>
         <% @kakeibos.each do |kakeibo| %>
         <tr>
+          <% if @serch_date=='day'%>
+            <td class="listbody" style="text-align: right"><%= kakeibo.kicho_year %>-<%= kakeibo.kicho_month %>-<%= kakeibo.kicho_day %></td>
+          <% elsif @serch_date=='month' %>
+            <td class="listbody" style="text-align: right"><%= kakeibo.kicho_year %>-<%= kakeibo.kicho_month %></td>
+          <% elsif @serch_date=='year' %>
             <td class="listbody" style="text-align: right"><%= kakeibo.kicho_year %></td>
-            <td class="listbody" style="text-align: right"><%= kakeibo.kicho_month %></td>
-            <td class="listbody" style="text-align: right"><%= kakeibo.kicho_day %></td>
+          <%else%>
+            <td class="listbody" style="text-align: right"><%= kakeibo.kicho_year %>-<%= kakeibo.kicho_month %>-<%= kakeibo.kicho_day %></td>
+          <% end %>
             <td class="listbody" style="text-align: right"><%= kakeibo.food_exp %></td>
             <td class="listbody" style="text-align: right"><%= kakeibo.amusement %></td>
             <td class="listbody" style="text-align: right"><%= kakeibo.entertainment_exp %></td>
